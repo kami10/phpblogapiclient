@@ -6,11 +6,13 @@ class Home
 {
     private ApiClient $apiClient;
     private TemplateRenderer $templateRenderer;
+    private RedisClient $redisClient;
 
-    public function __construct(ApiClient $apiClient, TemplateRenderer $templateRenderer)
+    public function __construct(ApiClient $apiClient, TemplateRenderer $templateRenderer, RedisClient $redisClient)
     {
         $this->apiClient = $apiClient;
         $this->templateRenderer = $templateRenderer;
+        $this->redisClient = $redisClient;
     }
 
     public function handle()
@@ -18,26 +20,28 @@ class Home
         $viewVariable = [];
 
         //Api getOne
-        $response = $this->apiClient->get('http://localhost/api?id=34');
-        $status = $response->getStatusCode();
-        $output = json_decode($response->getBody()->getContents());
-        $viewVariable = [
-            'status' => $status,
-            'output' => $output,
-        ];
-
-//        Api getAll
-//        $response = $this->apiClient->get('http://localhost/api');
-//        $allNews = json_decode($response->getBody()->getContents(), true);
-//        $viewVariable = [
-//            'news' => $allNews,
-//        ];
+//        $response = $this->apiClient->get('http://localhost/api?id=34');
 //        $status = $response->getStatusCode();
-//        $output = $response->getBody();
+//        $output = json_decode($response->getBody()->getContents());
 //        $viewVariable = [
 //            'status' => $status,
 //            'output' => $output,
 //        ];
+        //adding api into redis
+//        $addToRedis = $this->redisClient->set('apiArray', json_encode($output));
+//        $readFromRedis = json_decode($this->redisClient->get('apiArray'));
+
+//        Api getAll
+//        $response = $this->apiClient->get('http://localhost/api');
+//        $status = $response->getStatusCode();
+//        $output = json_decode($response->getBody()->getContents(), true);
+//        $viewVariable = [
+//            'status' => $status,
+//            'output' => $output,
+//        ];
+//adding api into redis
+//        $addToRedis = $this->redisClient->set('apiArray', json_encode($output));
+//        $readFromRedis = json_decode($this->redisClient->get('apiArray'));
 
         //in ro tu site mige vali inja javab nemide chon bejaye body form_param mifrestim ounvar nemifahme
 //        $response = $this->apiClient->request('POST', 'http://localhost/api', [

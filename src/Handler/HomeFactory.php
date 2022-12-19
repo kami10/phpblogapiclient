@@ -8,7 +8,8 @@ class HomeFactory
     {
         $apiClient = new ApiClient();
         $template = new TemplateRenderer();
+        $redisClient = new RedisClient();
 
-        return new Home($apiClient, $template);
+        return new Home($apiClient, $template, $redisClient);
     }
 }
